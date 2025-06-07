@@ -9,12 +9,12 @@ class: subpage
 
 翻译自[官方链接](https://github.com/eccstartup/tari/blob/development/docs/src/09_adding_tari_to_your_exchange.md)
 
-In this guide, we will cover the basics of getting a Minotari node operational and explain the process of setting up the associated wallets required to run Minotari on your exchange securely:
+在本指南中，我们将介绍让 Minotari 节点运行的基本知识，并解释安全运行 Minotari 进行交易所需的相关钱包的设置过程：
 
-* We will set up your own Minotari node
-* We will cover the creation of a Minotari wallet as the store of funds, as well as a corresponding read-only wallet for use by the exchange for monitoring transactions
-* We will discuss how to monitor the blockchain for transactions
-* We will cover both the depositing and withdrawal of funds to the wallet
+* 我们将教你如何建立你自己的Minotari节点
+* 我们将介绍如何创建 Minotari 钱包作为资金存储，以及相应的设置供监控交易的只读钱包
+* 我们将讨论如何监控区块链上的交易
+* 我们将涵盖将资金存入钱包和从钱包中提取资金
 
 This guide assumes that the node will not be used for mining.
 
