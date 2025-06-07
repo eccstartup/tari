@@ -1,5 +1,3 @@
-翻译自[官方链接](https://github.com/eccstartup/tari/blob/development/docs/src/09_adding_tari_to_your_exchange.md)
-
 ---
 layout: lesson
 title: Adding Tari to Your Exchange
@@ -8,6 +6,9 @@ author: stringhandler
 subtitle:
 class: subpage
 ---
+
+翻译自[官方链接](https://github.com/eccstartup/tari/blob/development/docs/src/09_adding_tari_to_your_exchange.md)
+
 In this guide, we will cover the basics of getting a Minotari node operational and explain the process of setting up the associated wallets required to run Minotari on your exchange securely:
 
 * We will set up your own Minotari node
