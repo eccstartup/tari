@@ -16,27 +16,27 @@ class: subpage
 * 我们将讨论如何监控区块链上的交易
 * 我们将涵盖将资金存入钱包和从钱包中提取资金
 
-This guide assumes that the node will not be used for mining.
+本指南假设该节点只用作钱包，不会用作挖矿。
 
-## Node Setup
-In order to accept Tari, you will need to have a Minotari node. While it is possible to use a public node with the correct gRPC methods exposed to the internet, it is recommended that you run your own node. 
+## 节点设置
+为了接受 Tari，您需要有 Minotari 节点。虽然可以使用具有暴露给 Internet 的正确 gRPC 方法的公共节点，但建议您运行自己的节点。
 
-It may also be worth running multiple nodes as backups to ensure availability.
+运行多个节点作为备份以确保可用性也是值得的。
 
-> Note: For all servers connected to the internet, they must either be running a Tor client or configure their public IP information. Documentation on this is available [here](https://github.com/tari-project/tari#README) and [here](https://github.com/tari-project/tari/discussions/6366). If you are running on Linux, the Tari applications have built-in Tor support, so this can be ignored.
+> 注意：对于所有连接到互联网的服务器，它们必须运行 Tor 客户端或配置其公共 IP 信息。关于这一点的文件可在[这里](https://github.com/tari-project/tari#README)和[这里](https://github.com/tari-project/tari/discussions/6366) 。如果你运行在 Linux 上，Tari 应用程序有内置的 Tor 支持，所以可以忽略这一点。
 
-### Section 1: Create a Minotari Node and run it
-The Minotari node is the base layer node required to receive and monitor transcations. 
+### 第 1 节：创建 Minotari 节点并运行它
+Minotari 节点是接收和监视事务所需的base layer节点。
 
-> NOTE: If you are using a public Minotari node, you can skip this section. Note that you will need the `public key` and the `public address` of the public node in question in order to correctly proceed with this exchange guide.
+> 注意：如果您使用的是公共 Minotari 节点，则可以跳过本节。请注意，您将需要有问题的公共节点的`公钥`和`公共地址` ，以便正确地进行此交换指南。
 
-1. Download the compiled binaries [here](https://tari.com/downloads/). If you would prefer to compile from source, you will need to follow the instructions located [here.](https://github.com/tari-project/tari#building-from-source)
+1. 在[这里](https://tari.com/downloads/)下载已编译的二进制文件。如果你更喜欢从源代码编译，你需要按照[这里](https://github.com/tari-project/tari#building-from-source)的说明。
 
-2. Use the instructions here to [install the binaries](https://github.com/tari-project/tari?tab=readme-ov-file#installing-using-binaries).
+2. 使用[此处](https://github.com/tari-project/tari?tab=readme-ov-file#installing-using-binaries)的说明安装二进制文件。
 
-> NOTE: Depending on your environment, the location of the installed files will likely change. For Mac and Linux, you will likely find it in your Home directory in a `.tari` folder. It may be hidden, in which case you will need to change your settings to be able to view hidden files. On Windows, it will install on in the location you specified during the installation process. To have Minotari create the folder in a specific location, you can use the `--b` path command. Note that you will require this command going forward if you are not using the default folder.
+> 注意：根据您的环境，安装文件的位置可能会发生变化。对于 Mac 和 Linux，您可能会在主目录的 `.tari` 文件夹中找到它。它可能是隐藏的，在这种情况下，您需要更改设置才能查看隐藏的文件。在 Windows 上，它将安装在您在安装过程中指定的位置。要让 Minotari 在特定位置创建文件夹，可以使用 `--b` path 命令。请注意，如果您不使用默认文件夹，则需要使用此命令。
 
-The following binaries will be available.
+安装后你将找到以下二进制文件。
 
 * minotari_console_wallet
 * minotari_merge_mining_proxy
@@ -46,24 +46,26 @@ The following binaries will be available.
 * randomx-codegen
 * randomx-tests
 
-The two required for the exchange are the **minotari_node** and **minotari_console_wallet**
+进行交易所需的两个文件是 **minotari_node** 和 **minotari_console_wallet**
 
-3. Start the node (consecutive runs): 
+3. 启动节点（连续运行）：
 ```
 minotari_node
 ```
 
-If a node has not yet been created, it will inform you that a node config file does not exist. You will also be asked if you wish to mine. Select `n` in this case.
+如果一个节点尚未创建，它将通知您节点配置文件不存在。你也会被问到你是否想要进行挖矿。在这种情况下选择 `n`。
 
-4. Next, you'll be asked if you wish to create a node identity. Select `y`. This is essential for generating the private/public key pair and getting the node recognised by the network.
+4. 接下来，系统将询问您是否希望创建节点标识。选择 y。这对于生成私钥/公钥对并让网络识别节点至关重要。
 
-Once done, the Minotari base node will boot up. You'll see a splash page with a list of the various Command Mode (accessible via Ctrl+C) commands available to you. Some useful ones are:
+设置完成后，Minotari 基本节点启动。您将看到一个页面，其中列出了各种可用的命令模式（可通过 Ctrl+C 访问）命令。一些有用的是：
 
-* `watch status`: returns you to the auto-refresh status from the Command Mode
-* `version`: which version of the Minotari Node you are running
-* `whoami`: provides address information related to the node
+* `watch status`: 从命令模式返回到自动刷新状态
+* `version`: 您正在运行的 Minotari Node 的版本
+* `whoami`: 提供与节点相关的地址信息
 
 5. Type `whoami` and press enter. You'll see your Public Key, Node ID and Public Address, along with a QR Code. You should copy this data to a file or secure location for future reference.
+
+输入 `whoami` 然后按回车键。您将看到您的公钥、节点 ID、公共地址和 QR 码。您应该将此数据复制到文件或安全位置以供将来参考。
 
 ```
 18:46 v1.0.0-pre.16 esmeralda State: Listening Tip: 3872 (Tue, 23 Jul 2024 14:27:53 +0000) Mempool: 0tx (0g, +/- 0blks) Connections: 0|0 Banned: 0 Messages (last 60s): 0 Rpc: 0/100 ️🔌
@@ -74,7 +76,7 @@ Public Addresses: /onion3/f5qbkkfkoxowzvshe5mppzpgiiy76cwumpsacungeldoal6hehcgzf
 Features: PeerFeatures(MESSAGE_PROPAGATION | DHT_STORE_FORWARD)
 ```
 
-6. Restart the node (Ctrl+C twice to quit, then typing `minotari_node` again).
+6. 重新启动节点（Ctrl+C 两次退出，然后再次键入 minotari_node）。
 
 ### Section 2: Creating a wallet
 In this section we'll create a wallet address for receiving funds. This wallet will serve as the main repository of your Tari coins.
