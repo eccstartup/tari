@@ -151,27 +151,27 @@ Type the word "confirm" to continue.
 
 > 注意：以下部分将介绍钱包的配置。虽然没有必要，但额外的安全预防措施是确认您复制的种子单词实际上可以恢复钱包。
 
-### Section 3: Obtain the addresses of the main wallet
+### 第3节：获取主钱包的地址
 
-Now that we have the wallet created, we will require the addresses - specifically, the `Tari Address one-sided` - to create the second wallet, which will be used to monitor transactions.
+现在我们已经创建了钱包，我们将需要地址`Tari Address one-sided`来创建第二个钱包，该钱包将用于监控交易。
 
-If you followed the instructions from the previous section, you should already be in the Minotari console wallet interface. If not, run `minotari_console_wallet --base-path ~/tari_wallet_data` and enter in your password to launch the interface.
+如果您按照上一节的说明进行操作，您应该已经进入 Minotari 控制台钱包界面。如果没有，请运行 `minotari_console_wallet --base-path ~/tari_wallet_data` 并输入密码以启动界面。
 
-1. While in the wallet interface, press the right arrow twice to get to the `Receive` tab. This tab will list all of the addresses associated with the wallet.
+1. 在钱包界面中，按两次向右箭头进入 `Receive` 选项卡。此选项卡将列出与钱包关联的所有地址。
 
 ![Alt text](./tariexchangeguide_wallet_addresses.png)
 
-2. Copy all of the information provided, with special note of the `Tari Address one-sided` field. This is the address that users will send funds to for the exchange.
+2. 复制提供的所有信息，特别注意 `Tari Address one-sided` 字段。这是用户将资金发送到交换的地址。
 
-3. Press `f10` or `Ctrl+Q` to exit the wallet
+3. 按 `f10` 或 `Ctrl+Q` 退出钱包
 
-4. Next, we'll export the view key for the wallet (We'll use this in **Section 4**). Run the following command and enter in your wallet password when prompted.
+4. 接下来，我们将导出钱包的view key（我们将在**第 4 节**中使用它）。运行以下命令，并在提示时输入钱包密码。
 
 ```
 minotari_console_wallet --base-path ~/tari_wallet_data export-view-key-and-spend-key
 ```
 
-You'll be presented with information that looks similar to the below:
+您将看到类似于以下内容的信息：
 
 ```
 1. ExportViewKeyAndSpendKey(ExportViewKeyAndSpendKeyArgs { output_file: None })
@@ -183,13 +183,13 @@ Minotari Console Wallet running... (Command mode completed)
 Press Enter to continue to the wallet, or type q (or quit) followed by Enter.
 ```
 
-5. Make note of the `view key` and `spend key`; copy them to an easily referenced place. We will require them in later steps.
+5. 记下 `view key` 和 `spend key`；将它们复制到容易引用的地方。我们将在以后的步骤中要求它们。
 
-6. Type `q` and then press `Enter` to exit the console wallet.
+6. 键入 `q`，然后按 `Enter` 退出控制台钱包。
 
-7. Make sure you have saved the above data. Permanently delete the folder `tari_wallet_data` and consider destroying or securely wiping the machine.
+7. 确保您已保存上述数据。永久删除文件夹 `tari_wallet_data`，并考虑销毁或安全擦除机器。（译者注：不一定销毁机器这么严重）
 
-> Note: Now is a good time to check your noted keys, seed words and addresses before remove the configuration data in the folder and/or destroying/wiping the device.
+> 注意事项：在删除文件夹中的配置数据和/或销毁/擦除设备之前，务必检查记录的密钥、种子短语和地址。
 
 ### Section 4: Setting up a read-only wallet to receive deposits
 In this section, we will create a second, read-only wallet that will watch for funds received at the address saved in the previous section. If you are integrating an exchange, this is how you can watch for received funds. This wallet will need to be able to access the Internet in some capacity.
