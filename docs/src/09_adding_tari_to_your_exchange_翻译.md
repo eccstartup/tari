@@ -78,30 +78,29 @@ Features: PeerFeatures(MESSAGE_PROPAGATION | DHT_STORE_FORWARD)
 
 6. 重新启动节点（Ctrl+C 两次退出，然后再次键入 minotari_node）。
 
-### Section 2: Creating a wallet
-In this section we'll create a wallet address for receiving funds. This wallet will serve as the main repository of your Tari coins.
+### 第2节：创建钱包
+在本节中，我们将创建用于接收资金的钱包地址。这个钱包将作为您的 Tari 币的主要存储库。
 
-> NB: This is a crucial step in the process. Creating the wallet in secure environment and following the instructions is important to secure this wallet and prevent malicious actors being able to transfer Tari. Read the instructions carefully. If there is any doubt regarding ANY part of the process, please contact the Tari Community for clarification and assistance.
+> NB：这是这个过程中的关键一步。在安全环境中创建钱包并遵循说明对于保护此钱包并防止恶意行为者转移 Tari 非常重要。仔细阅读说明。如果对流程的任何部分有任何疑问，请联系 Tari 社区寻求澄清和帮助。
 
-The Minotari wallet creation process is reliant on a seed word phrase to generate the associated master key. This seed phrase also allows for the recovery of the wallet. The seed phrase is a 24-word phrases generated from a pre-defined list of words, which will be displayed during the process.
+Minotari 钱包创建过程依赖于seed word phrase（种子短语）来生成相关的主密钥。这个种子短语也允许钱包的恢复。种子短语是从预定义的单词列表中生成的 24 个单词的短语，这些单词将在过程中显示。
 
-> **WARNING: It is highly recommended this process is performed on a trusted machine that is disconnected from any other device or the Internet. The utmost caution should be taken in creating the wallet and noting and securing the seed phrase.**
+> **建议：强烈建议在与任何其他设备或 Internet 断开连接的受信任计算机上执行此过程。在创建钱包以及注意和保护种子短语时应非常谨慎。**
 
-1. First, let's create a folder to hold all the wallet data.
+1. 首先，让我们创建一个文件夹来保存所有钱包数据。
 ```
 mkdir tari_wallet_data
 cd tari_wallet_data
 ```
 
-> Note: At multiple points in the sections covering the creation of the wallets, you will be directed to copy or note seed phrases, keys and other information. Do not store any of these within the created folder above, as you will need to delete this folder permanently in later steps.
+> 注意事项：在钱包创建部分的多个位置，您将被引导复制或记录种子短语，密钥和其他信息。不要将这些文件存储在上面创建的文件夹中，因为您需要在后面的步骤中永久删除此文件夹。
 
-2. Now let's run the wallet. Make sure that you specify the `--base-path` field to keep all the data in the above folder so that you can delete it afterwards.
+2. 现在开始运行钱包，确保指定 `--base-path` 字段以保留上述文件夹中的所有数据，以便以后可以删除它。
 ```
 minotari_console_wallet --base-path ~/tari_wallet_data
 ```
 
-3. You'll be presented with a menu. As this guide assumes you are setting up Minotari for the first time, select `1`
-
+3. 你会看到一个菜单。本指南假设您是第一次设置 Minotari，请选择 `1`
 ```
 Console Wallet
 
@@ -111,7 +110,7 @@ Console Wallet
 >>
 ```
 
-4. You will be asked if you want to mine. Choose `n`
+4. 你会被问到你是否想要挖矿。选择 `n`
 
 ```
 Node config does not exist.
@@ -119,17 +118,17 @@ Would you like to mine (Y/n)?
 NOTE: this will enable additional gRPC methods that could be used to monitor and submit blocks from this node.
 ```
 
-5. You will be asked if you wish to use a connected hardware wallet. Press `n` here.
+5. 系统会询问您是否希望使用已连接的硬件钱包。在这里按 `N`。
 
 ```
 Would you like to use a connected hardware wallet? (Supported types: Ledger) (Y/n)
 ```
 
-6. Next you will be asked for a password. You will need to save this password for future use. Enter this password now, and then again to confirm it. Be meticulous when doing so. We recommend following best practices to generating a strong password.
+6. 接下来，系统将要求您输入密码。您需要保存此密码以备将来使用。现在输入这个密码，然后再确认一次。在这样做的时候要小心。我们建议遵循最佳实践来生成强密码。
 
-> NOTE: You will not see the password as you type it.
+> 注意：您键入密码时不会看到命令行中的密码。
 
-7. **This next step is vital. Be sure that no information leaks and that the seed phrase is only visible to yourself and/or trusted parties.** Following entry of the password, you will be presented with your seed words. Carefully note the seed words, write them down and secure them. Make sure you have appropriate, equally secure backups. You will only be able to proceed to the next step once you have typed `confirm` and pressed `Enter`.
+7. **下一步至关重要。确保没有信息泄漏，并且种子短语仅对您自己和/或受信任方可见。** 输入密码后，您将看到您的种子单词。仔细记下种子词，把它们写下来，并确保它们是安全的。确保您有适当的，同样的安全备份。只有在输入 `confirm` 并按下 `Enter` 键后，您才能继续进行下一步。
 
 ```
 =========================
@@ -148,9 +147,9 @@ Type the word "confirm" to continue.
 >>
 ```
 
-8. At this point, the Minotari wallet will launch in the console interface.
+8. 此时，Minotari 钱包将在控制台界面中启动。
 
-> Note: The following sections deal with configuration of the wallet. While not necessary, an extra safety precaution would be to confirm that the seed words you copied can actually recover the wallet.
+> 注意：以下部分将介绍钱包的配置。虽然没有必要，但额外的安全预防措施是确认您复制的种子单词实际上可以恢复钱包。
 
 ### Section 3: Obtain the addresses of the main wallet
 
