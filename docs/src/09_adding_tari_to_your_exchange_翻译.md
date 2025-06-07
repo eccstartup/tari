@@ -118,7 +118,7 @@ Would you like to mine (Y/n)?
 NOTE: this will enable additional gRPC methods that could be used to monitor and submit blocks from this node.
 ```
 
-5. 系统会询问您是否希望使用已连接的硬件钱包。在这里按 `N`。
+5. 系统会询问您是否希望使用已连接的硬件钱包。在这里按 `n`。
 
 ```
 Would you like to use a connected hardware wallet? (Supported types: Ledger) (Y/n)
@@ -200,7 +200,7 @@ Press Enter to continue to the wallet, or type q (or quit) followed by Enter.
 
 > 注意：默认情况下，所有数据都存储在 `~/.tari` 中。你可以在这里找到所有的日志、配置和数据。如果你想使用一个特定的文件夹，你可以使用 `--base-path` 参数来指向一个现有的文件夹或你之前为此目的创建的文件夹。
 
-2. 你会被问到你是否想要挖矿。选择 `N`
+2. 你会被问到你是否想要挖矿。选择 `n`
 
 ```
 Node config does not exist.
@@ -287,10 +287,10 @@ minotari_console_wallet
 
 您现在可以接受存款了。在下一节中，我们将解释如何监听传入交易。
 
-### Section 6: Listening for incoming transactions
-How you listen for incoming transactions (and what you do with them) will depend on your process. For our example, we'll use the gRPC server that is hosted in the read-only wallet we just created to listen for incoming deposits. 
+### 第6节：监听传入交易
+如何监听传入的事务（以及如何处理它们）将取决于您的流程。在我们的示例中，我们将使用托管在我们刚刚创建的只读钱包中的 gRPC 服务器来监听传入的存款。
 
-Reach out to us if you would like an example in your favourite language. You can find more information about the methods available in [wallet.proto here](https://github.com/tari-project/tari/blob/development/applications/minotari_app_grpc/proto/wallet.proto).
+如果您想要以您最喜欢的语言提供示例，请联系我们。您可以在 [wallet.proto](https://github.com/tari-project/tari/blob/development/applications/minotari_app_grpc/proto/wallet.proto) 中找到有关可用方法的更多信息。
 
 ```javascript
 const grpc = require('@grpc/grpc-js');
@@ -337,9 +337,9 @@ call.on('status', (status) => {
 });
 ```
 
-This is a basic implementation; some additional items you may want to consider for a production environment are: 
+这是一个基本实现；对于生产环境，您可能需要考虑的一些其他项目包括：
 
-* Using `grpc.credentials.createSsl()` to secure the connection between the wallet and any application calling it. We'll not discuss the process of creating a server key or certificate here; you can read more about the process [here](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=profile-generating-self-signed-certificate-using-openssl). Below is an example:
+* 使用 `grpc.credentials.createSsl()` 来保护钱包和任何调用它的应用程序之间的连接。我们不会在这里讨论创建服务器密钥或证书的过程；您可以[在这里](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=profile-generating-self-signed-certificate-using-openssl)阅读更多关于该过程的信息。下面是一个例子：
 
 ```javascript
 // Load the protobuf definition
@@ -388,7 +388,7 @@ call.on('status', (status) => {
 });
 ```
 
-## Descriptions of Common Activities
+## 常规活动用法
 ### Section 7: An example for receiving funds
 Each exchange will have their own processes, but here is an example of receiving funds from a KYC'ed client. 
 
