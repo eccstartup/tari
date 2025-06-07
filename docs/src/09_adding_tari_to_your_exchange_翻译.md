@@ -191,16 +191,16 @@ Press Enter to continue to the wallet, or type q (or quit) followed by Enter.
 
 > 注意事项：在删除文件夹中的配置数据和/或销毁/擦除设备之前，务必检查记录的密钥、种子短语和地址。
 
-### Section 4: Setting up a read-only wallet to receive deposits
-In this section, we will create a second, read-only wallet that will watch for funds received at the address saved in the previous section. If you are integrating an exchange, this is how you can watch for received funds. This wallet will need to be able to access the Internet in some capacity.
+### 第4节：设置只读钱包以接收存款
+在本节中，我们将创建第二个钱包，即只读钱包，它将监视在上一节中保存的地址收到的资金。如果你正在进行一笔交易，这是你可以观察收到的资金的方式。这个钱包将需要能够联网。
 
-> NOTE: This second wallet will not have the ability to spend any funds. While this limits the security risk, it is good practice to maintain security best practices when configuring any system that has access to the chain and has some association with the the main wallet.
+> 注意：第二个钱包将无法发送任何资金。虽然这限制了钱包使用，但在配置任何可以访问链并与主钱包有某种关联的系统时，保持安全最佳实践是一个很好的做法。
 
-1. On a server machine that is connected to the internet. Run this command `minotari_console_wallet` to create a wallet.
+1. 在连接到互联网的服务器上。运行 minotari_console_wallet 命令创建钱包。
 
-> Note: By default all data is stored in `~/.tari`. You can find all logs, config and data in there. If you would like to use a specific folder, you can use the `--base-path` argument to point to an existing folder or one you've created prior for this purpose.
+> 注意：默认情况下，所有数据都存储在 `~/.tari` 中。你可以在这里找到所有的日志、配置和数据。如果你想使用一个特定的文件夹，你可以使用 `--base-path` 参数来指向一个现有的文件夹或你之前为此目的创建的文件夹。
 
-2. You will be asked if you want to mine. Choose `N`
+2. 你会被问到你是否想要挖矿。选择 `N`
 
 ```
 Node config does not exist.
@@ -208,7 +208,7 @@ Would you like to mine (Y/n)?
 NOTE: this will enable additional gRPC methods that could be used to monitor and submit blocks from this node.
 ```
 
-3. Next, you will be asked if you want to create a new wallet, restore it, or create a read-only wallet using a view key. We want to create a _read-only wallet_, so we will select `3` here.
+3. 接下来，您将被询问是否要创建新钱包，恢复它，或使用视图密钥创建只读钱包。我们想创建一个只读钱包 ，所以我们在这里选择 `3`。
 
 ```
 Console Wallet
@@ -219,11 +219,12 @@ Console Wallet
 >>
 ```
 
-4. Next we will be asked for a password. You will need to save this password for future use. Enter this password now and confirm it. 
+4. 接下来我们将被要求输入密码。您需要保存此密码以备将来使用。现在输入此密码并确认。
 
-> Note: It is suggested you use a different password here from the one used to create the first wallet.
+> 注意：建议您在此处使用与创建第一个钱包时使用的密码不同的密码。
 
 5. You will need to enter the view and spend keys noted in **Section 4**
+您需要输入**第 3 节**中提到的`view key`和`spend key`
 
 ```
 Enter view key:  (hex)
@@ -233,12 +234,12 @@ Enter the public spend key:  (hex or base58)
 <...public spend key here...>  
 ```
 
-6. You should now see the familiar console wallet. We'll need to configure it further in its accompanying configuration file, so close it for now by pressing `f10` or `Ctrl+Q` and move onto the next section.
+6. 您现在应该看到熟悉的控制台钱包。我们需要在其附带的配置文件中进一步配置它，所以现在按 `f10` 或 `Ctrl+Q` 关闭它并进入下一节。
 
-### Section 5: Configuring the read-only wallet
-1. Browse to the config file under `~/.tari/mainnet/config/config.toml` (or the folder where you specified the wallet configuration should be stored) and open it in your favourite text editor.
+### 第5节：配置只读钱包
+1. 找到 `~/.tari/mainnet/config/config.toml` 配置文件（或您指定的钱包配置文件夹中相应的文件），并在您最喜欢的文本编辑器中打开它。
 
-2. Find the section `Wallet Configuration Options (WalletConfig)`. Below is a typical example of the beginning of the wallet configuration section within the `config.toml` file.
+2. 找到 `Wallet Configuration Options (WalletConfig)`部分。下面是 `config.toml` 文件中钱包配置部分开头的一个典型示例。
 
 ```toml
 ########################################################################################################################
@@ -253,9 +254,9 @@ Enter the public spend key:  (hex or base58)
 #buffer_size = 50000is
 ```
 
-3. Next, find the line `#grpc_enabled = false` and change it to `grpc_enabled = true`. You will also need to uncomment the `grpc_address`.
+3. 接下来，找到行 `#grpc_enabled = false` 并将其更改为 `grpc_enabled = true`。您还需要取消对 `grpc_address` 的注释。
 
-> Note: If you wish to secure the gRPC more, you can edit the other settings, such as the `grpc_authentication`. It is important that the wallet's gRPC port is not accessible from the public internet
+> 注意：如果您希望更安全的 gRPC，您可以编辑其他设置，如 `grpc_authentication`。让钱包的 gRPC 端口不能从公共互联网访问很重要
 
 ```toml
 # Set to true to enable grpc. (default = false)
@@ -266,9 +267,10 @@ grpc_address = "/ip4/127.0.0.1/tcp/18143"
 #grpc_authentication = { username = "admin", password = "xxxx" }
 ```
 
-4. Set the wallet's base node. Set this value to the `minotari_node` you created or chose at the beginning of this guide in **Section 1**.
+4. 设置钱包的基本节点。将此值设置为您在**第 1 节**中创建或选择的 `minotari_node`。
 
 > Note: The format is `<...public key...>::<...public address...>`, with <...> being replaced with the addresses noted previously. Below is a sample of what these configuration settings look like, using the example data from **Section 1**. You should not use the data below, but insert your own details.
+注意：格式为 `<...public key...>::<...public address...>`，其中 `<...>` 被替换为之前提到的地址。下面是这些配置设置的示例，使用**第 1 节**中的示例数据。您**不应该**使用下面的数据，而是插入您自己的详细信息。
 
 ```toml
 # A custom base node peer that will be used to obtain metadata from, example
@@ -277,13 +279,13 @@ grpc_address = "/ip4/127.0.0.1/tcp/18143"
 custom_base_node = "22d33b525d35d256674c5184c262b70d15275effcf5f6fe6dc0d359a18541d04::/onion3/6x54mmubphz5r3opswpuhseswivvlaxbohuqvwsn4o36zmtudq73dgid:18141"
 ```
 
-5. Save the file and start the wallet again.
+5. 保存文件并重新启动钱包。
 
 ```
 minotari_console_wallet
 ```
 
-You are now ready to receive deposits. In the next section we'll explain how to listen for incoming transactions.
+您现在可以接受存款了。在下一节中，我们将解释如何监听传入交易。
 
 ### Section 6: Listening for incoming transactions
 How you listen for incoming transactions (and what you do with them) will depend on your process. For our example, we'll use the gRPC server that is hosted in the read-only wallet we just created to listen for incoming deposits. 
