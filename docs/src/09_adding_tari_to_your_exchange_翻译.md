@@ -389,44 +389,43 @@ call.on('status', (status) => {
 ```
 
 ## 常规活动用法
-### Section 7: An example for receiving funds
-Each exchange will have their own processes, but here is an example of receiving funds from a KYC'ed client. 
+### 第7节：交易所接收资金示例
+每个交易所都有自己存入资金流程，下面是一个从 KYC 交易所存入资金流程的例子。
 
-1. The client begins the deposit process. For example, clicking on a "Deposit" button.
+1. 客户开始存款过程。例如，点击 "Deposit" 按钮。
 
-2. The exchange generates a long unique ID for the deposit. This may be a single reference that is reused for the client, or every deposit may have their own reference.
+2. 交易所为存款生成一个长的唯一ID。这可以是客户端重复使用的单个`reference`，或者每个存款都可以有自己的`reference`。
 
-3. The exchange provides their `Tari Address one-sided` address and the reference to the client. The exchange must also save this reference in their internal database.
+3. 交易所提供他们的 `Tari Address one-sided` 地址和客户端的引用。交易所还必须将此引用保存在其内部数据库中。
 
-> Note: Exchanges should use the one-sided or non-interactive addresses so they can receive deposits even if their infrastructure is offline. Interactive addresses are intended for peer-to-peer transactions.
+> 注意：交易所应使用单边或非交互式地址，以便即使其基础设施处于离线状态，也可以接收存款。交互式地址用于点对点交易。
 
-4. The client uses Tari Aurora or another Tari-enabled wallet and sends a non-interactive transaction to the provided address. They must include the provided reference with this transaction.
+4. 客户使用 `Tari Aurora` 或其他支持 Tari 的钱包，并向提供的地址发送非`交互式交易`。他们必须包括`reference`的与此交易。
 
-> Note: Using the Minotari console wallet, for example, the recommendation would be for the user to place your payment reference in the `Payment ID` field.
+> 注意：例如，使用 Minotari 控制台钱包，建议用户将您的付款参考放在`Payment ID`字段中。
 
-5. A process similar to the example in **Section 6**, the exchange periodically runs the script to see if there are any new transactions.
+5. 这个过程类似于**第 6 节**中的示例，交易所定期运行脚本，以查看是否有任何新的交易。
 
-6. For new transactions, compare against the list of expected references in their internal database and if there is a match, call the internal system to allocate funds to the client's account.
+6. 对于新的交易，与其内部数据库中的预期参考列表进行比较，如果有匹配，请调用内部系统将资金分配到客户的帐户。
 
-### Section 8: Performing withdrawals
+### 第8节：从本地发送Tari币示例
+在本节中，我们将从**第 3 节**中使用的同一地址执行取款。您还可以拥有多个不同的钱包并在它们之间发送资金。该过程基本相同，但超出了本文档的范围。
 
-In this section we'll perform a withdrawal from the same address we used in **Section 3**. It is also possible to have a number of different wallets and send funds between them. The process is mostly the same, but is out of scope for this document.
+> 注意：用于支出资金的钱包不应联网超过必要的时间。建议运行此钱包的机器是安全的。
 
-> NOTE: The wallet used to spend funds should not be online for more time than is necessary. It is recommended that the machine running this wallet is secured.
+在我们花钱之前，我们必须用**第 2 节**第 7 步中创建的种子词设置一个钱包。
 
-Before we spend funds, we must have a wallet set up with the seed words created in Step 7 of **Section 2**.
+钱包设置完成后，继续下面的步骤。
 
-Once the wallet is set up, continue with the steps below.
-
-1. Run the wallet to update the balance
+1. 运行钱包更新余额
 
 ```
 minotari_console_wallet --password <password> -p "wallet.custom_base_node=<...node_pub_key...>::<...node_pub_address...>" --auto-exit sync
 ```
 
-> Note: The custom base node can also be set as an environment variable `TARI_WALLET__CUSTOM_BASE_NODE`
+> 注意：自定义基节点也可以设置为环境变量 `TARI_WALLET__CUSTOM_BASE_NODE`
 
-2. Validate there are sufficient funds in the wallet
+2. 检查钱包里是否有足够的钱
 ```
 minotari_console_wallet --password <password> -p "wallet.custom_base_node=<...node_pub_key...>::<...node_pub_address...>" --auto-exit get-balance
 ```
@@ -447,17 +446,17 @@ Pending outgoing balance: 0 µT
 Minotari Console Wallet running... (Command mode completed)
 ```
 
-3. Next, send funds to the desired address.
+3. 接下来，将资金发送到所需的地址。
 
 ```
 minotari_console_wallet --password <password> -p "wallet.custom_base_node=<node_pub_key>::<node_pub_address>" --auto-exit send-minotari <amount> <destination>
 ```
 
-Replace `<amount>` and `<destination>` with the amount to send and Tari address to send funds to. Note: The amount is specified in units of 0.000001 XTM. To specify the amount in Tari, you can append the letter `T`. For example, `send-minotari 10000` would send an amount of `0.01 XTM`. `send-minotari 10000T` would send an amount of `10000 XTM`.
+将 `<amount>` 和 `<destination>` 替换为要发送的金额和要将资金发送到的 Tari 地址。注：金额以 0.000001 XTM 为单位。要指定Tari金额，你可以附加字母 `T`.例如，`send-minotari 10000` 将发送 `0.01 XTM` 的量。`send-minotari 10000 T` 将发送 `10000 XTM` 的量。
 
-Exchanges should not allow clients to provide interactive Tari Addresses. This can be easily validated by checking the second byte of the address. Specifically, the byte that represents an interactive wallet would be 01 in hexadecimal, or 00000001 in binary.
+交易所不应允许客户提供交互式 Tari 地址。这可以通过检查地址的**第2个字节**来轻松验证。具体来说，表示交互式钱包的字节在十六进制中是 01，在二进制中是 00000001。
 
-To break it down:
-* The value is 01 (hexadecimal)
-* In binary, this is 00000001
-* The least significant bit (rightmost bit) is 1, indicating support for interactive transactions
+具体来讲：
+* 值为01（十六进制）
+* 在二进制中，是0000001
+* 最低有效位（最右边的位）为1，表示支持交互式交易
