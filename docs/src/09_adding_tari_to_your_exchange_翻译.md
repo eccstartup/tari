@@ -63,9 +63,7 @@ minotari_node
 * `version`: 您正在运行的 Minotari Node 的版本
 * `whoami`: 提供与节点相关的地址信息
 
-5. Type `whoami` and press enter. You'll see your Public Key, Node ID and Public Address, along with a QR Code. You should copy this data to a file or secure location for future reference.
-
-输入 `whoami` 然后按回车键。您将看到您的公钥、节点 ID、公共地址和 QR 码。您应该将此数据复制到文件或安全位置以供将来参考。
+5. 输入 `whoami` 然后按回车键。您将看到您的公钥、节点 ID、公共地址和 QR 码。您应该将此数据复制到文件或安全位置以供将来参考。
 
 ```
 18:46 v1.0.0-pre.16 esmeralda State: Listening Tip: 3872 (Tue, 23 Jul 2024 14:27:53 +0000) Mempool: 0tx (0g, +/- 0blks) Connections: 0|0 Banned: 0 Messages (last 60s): 0 Rpc: 0/100 ️🔌
